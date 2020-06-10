@@ -21,11 +21,12 @@ void entrega();
 float calculoPag(float totalPag);
 
 float carrinho[]={0,0,0};
-float prodPreco[]={1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0};
+float prodPreco[]={1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0};
 int quantProd[10], i=0, escProd,n;
 int main(void) {
-  char nome[30];
-  char endereco[30];
+  char nomeTeste[30];
+  char enderecoTeste[30];
+  int numerocasa;
   char resp;
   float totalProd=0,totalPag=0, pagamento;
  	printf("------------------- Loja teste --------------------");
@@ -34,7 +35,7 @@ int main(void) {
 	{
 		// obtém a escolha do usuário
 		resp = menu();
- 
+
 		// testa o valor de "resp"
 		if(resp == '1')
 			jogos_pc();
@@ -61,16 +62,21 @@ int main(void) {
     for(n=0;n<i;n++){
     totalProd=carrinho[n]*quantProd[n];
     totalPag+=totalProd;
-    printf("Preço: %.2f Quantidade %d  Total = %.2f\n", carrinho[n], quantProd[n],totalProd);
+    printf("Preço: %.2f Quantidade %d\n", carrinho[n], quantProd[n]);
     }
+
   printf("Total a pagar: %.2f\n", totalPag);
   pagamento = calculoPag(totalPag);
   printf("%.2f\n", pagamento);
-
+  fflush(stdin);
   printf("Digite o nome do pagador: ");
-  fgets(nome,30,stdin);
+  fgets(nomeTeste,30,stdin);
+  fflush(stdin);
   printf("Endereço: ");
-  fgets(endereco,30,stdin);
+  fgets(enderecoTeste,30,stdin);
+  fflush(stdin);
+  printf("Numero da residencia: ");
+  scanf("%d", &numerocasa);
 
 	printf("\nBye! Visite novamente c:\n");
   return 0;
@@ -78,7 +84,7 @@ int main(void) {
 
 char menu(){
   char resp[2];
- 
+  fflush(stdin);
 	printf("\n1 - Jogos de PC\n");
 	printf("2 - Jogos de PS3\n");
 	printf("3 - Jogos de PS4\n");
@@ -93,7 +99,7 @@ char menu(){
 }
 
 void jogos_pc(){
-  printf("| Produto 1=1R | Produto 1=2R | Produto 1=3R |\n");
+  printf("| 1- Dark Souls III | 2- Sekiro | 3- Cyberpunk 2077 |\n");
   printf("------------------------------: ");
   scanf("%d", &escProd);
   if(escProd==1){
@@ -116,7 +122,7 @@ void jogos_pc(){
 }
 
 void jogos_ps3(){
-  printf("| Produto 2=4R | Produto 2=5R | Produto 2=6R |\n");
+  printf("| 1- God Of War 3 | 2- The Last Of Us I | 3- Uncharted 4 |\n");
   printf("------------------------------: ");
   scanf("%d", &escProd);
   if(escProd==1){
@@ -139,7 +145,7 @@ void jogos_ps3(){
 }
 
 void jogos_ps4(){
-  printf("| Produto 3=7R | Produto 3=8R | Produto 3=9 |\n");
+  printf("| 1- The Last Of Us II | 2- God Of War 4| 3- Gran Turismo |\n");
   printf("------------------------------: ");
   scanf("%d", &escProd);
   if(escProd==1){
@@ -161,21 +167,69 @@ void jogos_ps4(){
 }
 
 void jogos_xbox360(){
-  printf("Teste 10");
-  printf("Teste 11");
-  printf("Teste 12");
+  printf("| 1- Halo 1 | 2- Gears Of War 2 | 3- Fifa 20 |\n");
+  printf("------------------------------: ");
+  scanf("%d", &escProd);
+  if(escProd==1){
+  carrinho[i]=prodPreco[9];
+  printf("Quantidade: ");
+  scanf("%d", &quantProd[i]);
+  }
+  else if(escProd==2){
+  carrinho[i]=prodPreco[10];
+  printf("Quantidade: ");
+  scanf("%d", &quantProd[i]);
+        }
+  else if(escProd==3){
+  carrinho[i]=prodPreco[11];
+  printf("Quantidade: ");
+  scanf("%d", &quantProd[i]);}
+        else
+  printf("Opção digitada inválida, por favor tente novamente.");
 }
 
 void jogos_xboxone(){
-  printf("Teste 13");
-  printf("Teste 14");
-  printf("Teste 15");
+  printf("| 1- Recore | 2- Halo Wars 2| 3- Sea Of Thieves |\n");
+  printf("------------------------------: ");
+  scanf("%d", &escProd);
+  if(escProd==1){
+  carrinho[i]=prodPreco[12];
+  printf("Quantidade: ");
+  scanf("%d", &quantProd[i]);
+  }
+  else if(escProd==2){
+  carrinho[i]=prodPreco[13];
+  printf("Quantidade: ");
+  scanf("%d", &quantProd[i]);
+        }
+  else if(escProd==3){
+  carrinho[i]=prodPreco[14];
+  printf("Quantidade: ");
+  scanf("%d", &quantProd[i]);}
+        else
+  printf("Opção digitada inválida, por favor tente novamente.");
 }
 
 void controles(){
-  printf("Teste 16");
-  printf("Teste 17");
-  printf("Teste 18");
+  printf("| 1- PS4 | 2- Xbox One | 3- Controle para computador |");
+  printf("------------------------------: ");
+  scanf("%d", &escProd);
+  if(escProd==1){
+  carrinho[i]=prodPreco[15];
+  printf("Quantidade: ");
+  scanf("%d", &quantProd[i]);
+  }
+  else if(escProd==2){
+  carrinho[i]=prodPreco[16];
+  printf("Quantidade: ");
+  scanf("%d", &quantProd[i]);
+        }
+  else if(escProd==3){
+  carrinho[i]=prodPreco[17];
+  printf("Quantidade: ");
+  scanf("%d", &quantProd[i]);}
+        else
+  printf("Opção digitada inválida, por favor tente novamente.");
 }
 
 float calculoPag(float totalPag){
@@ -213,7 +267,6 @@ float calculoPag(float totalPag){
   }
   else
   printf("Inválido\n");
-
 return valor;}
 
 void entrega(){

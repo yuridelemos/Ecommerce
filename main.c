@@ -24,6 +24,8 @@ float carrinho[]={0,0,0};
 float prodPreco[]={1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0};
 int quantProd[10], i=0, escProd,n;
 int main(void) {
+  char nome[30];
+  char endereco[30];
   char resp;
   float totalProd=0,totalPag=0, pagamento;
  	printf("------------------- Loja teste --------------------");
@@ -46,12 +48,6 @@ int main(void) {
 			jogos_xboxone();
 		else if(resp == '6')
 			controles();
-		/*else if(resp == '7')
-			controles();
-		else if(resp == '8')
-			entregar_filme();
-		else if(resp == '9')
-			excluir_filme();*/
 		else if(resp == '0') // se for igual a 0, então sai do loop while
 			break;
 		else
@@ -69,10 +65,12 @@ int main(void) {
     }
   printf("Total a pagar: %.2f\n", totalPag);
   pagamento = calculoPag(totalPag);
-  printf("%.2f", pagamento);
+  printf("%.2f\n", pagamento);
 
   printf("Digite o nome do pagador: ");
-  fgets(cliente.nome,100,stdin);
+  fgets(nome,30,stdin);
+  printf("Endereço: ");
+  fgets(endereco,30,stdin);
 
 	printf("\nBye! Visite novamente c:\n");
   return 0;
@@ -87,6 +85,7 @@ char menu(){
 	printf("4 - Jogos de Xbox360\n");
 	printf("5 - Jogos Xbox One\n");
 	printf("6 - Controles\n");
+  printf("7 - Estoque de produtos\n");
 	printf("0 - Carrinho\n");
 	printf("Digite o numero da opcao: ");
 	scanf("%1s%*c", resp); // o *c pega o Enter e descarta
@@ -221,3 +220,19 @@ void entrega(){
   printf("Digite o nome do pagador: ");
   fgets(cliente.nome,100,stdin);
 }
+
+/* Tenho que botar a opção de visualizar
+carrinho e retirar o produto do carrinho
+(Seria zerar o vetor do produto)
+
+Ideia pra cadastro:
+1 - cliente
+2 - produtos
+3 - Vendas
+
+Opção 1: cliente
+  1- Novo cliente
+  2- Lista de clientes cadastrados
+  3-...
+  4- sair
+  */

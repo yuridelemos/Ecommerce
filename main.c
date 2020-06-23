@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 #define MAX 100
 
 struct cliente{
@@ -23,13 +24,19 @@ float calculoPag(float totalPag);
 float carrinho[]={0,0,0};
 float prodPreco[]={1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0};
 int quantProd[10], i=0, escProd,n;
+int estoqueProd[10]={9,8,7,9,7,7,5,6,9,4};
 int main(void) {
   char nomeTeste[30];
   char enderecoTeste[30];
   int numerocasa;
   char resp;
   float totalProd=0,totalPag=0, pagamento;
- 	printf("------------------- Loja teste --------------------");
+  setlocale(LC_ALL,"Portuguese");
+  	printf(" _________________________________________________\n");
+ 	printf("|                   GamePlay                      |\n");
+ 	printf("|             Next level in your life             |\n");
+ 	printf("|  Loja de produtos destinados ao público gamer   |\n");
+ 	printf("|_________________________________________________|\n");
 	// loop infinito do programa
 	while(1)
 	{
@@ -56,7 +63,7 @@ int main(void) {
 			printf("\nOpcao invalida! Pressione <Enter> para continuar...");
 			scanf("%*c");
 		}
-   i++;
+  	 i++;
 	}
   //CÁLCULO DAS COMPRAS, QUANTIDADE E PREÇO DE SAÍDA.
     for(n=0;n<i;n++){
@@ -91,7 +98,7 @@ char menu(){
 	printf("4 - Jogos de Xbox360\n");
 	printf("5 - Jogos Xbox One\n");
 	printf("6 - Controles\n");
-  printf("7 - Estoque de produtos\n");
+	printf("7 - Estoque de produtos\n");
 	printf("0 - Carrinho\n");
 	printf("Digite o numero da opcao: ");
 	scanf("%1s%*c", resp); // o *c pega o Enter e descarta
@@ -99,142 +106,234 @@ char menu(){
 }
 
 void jogos_pc(){
+  fflush(stdin);
   printf("| 1- Dark Souls III | 2- Sekiro | 3- Cyberpunk 2077 |\n");
+  printf("| R$: 80,00 | R$: 10,00 |\n");
+  printf("|Estoque: %d|Estoque: %d|Estoque: %d|\n", estoqueProd[0],estoqueProd[1],estoqueProd[2]);
   printf("------------------------------: ");
   scanf("%d", &escProd);
   if(escProd==1){
   carrinho[i]=prodPreco[0];
   printf("Quantidade: ");
-   scanf("%d", &quantProd[i]);
+  scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[0] || quantProd[i]==estoqueProd[0]){ // Tive que botar "|| quantProd[i]==estoqueProd[0]" porque apesar
+		estoqueProd[0]-=quantProd[i];								//de funcionar com "<=" dava como encerrado o programa
+	}else if(quantProd[i]>estoqueProd[0]){
+			printf("Desculpe, estoque do produto insuficiente.");}
         }
   else if(escProd==2){
   carrinho[i]=prodPreco[1];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[1] || quantProd[i]==estoqueProd[1]){
+		estoqueProd[1]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[1]){
+			printf("Desculpe, estoque do produto insuficiente.");}
         }
   else if(escProd==3){
   carrinho[i]=prodPreco[2];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[2] || quantProd[i]==estoqueProd[2]){
+		estoqueProd[2]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[2]){
+			printf("Desculpe, estoque do produto insuficiente.");}
   }
   else
-  printf("Número digitado inválido, por favor tente novamente.");
+  	printf("Número digitado inválido, por favor tente novamente.");
 }
 
 void jogos_ps3(){
-  printf("| 1- God Of War 3 | 2- The Last Of Us I | 3- Uncharted 4 |\n");
+  printf("| 1- God Of War 3 | 2- The Last Of Us I | 3- Uncharted 3 |\n");
+  printf("| R$: 33,00 | R$: 36,00| R$: 45,00 |\n");
+  printf("|Estoque: %d|Estoque: %d|Estoque: %d|\n", estoqueProd[3],estoqueProd[4],estoqueProd[5]);
   printf("------------------------------: ");
   scanf("%d", &escProd);
   if(escProd==1){
   carrinho[i]=prodPreco[3];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[3] || quantProd[i]==estoqueProd[3]){
+		estoqueProd[3]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[3]){
+			printf("Desculpe, estoque do produto insuficiente.");}
         }
   else if(escProd==2){
   carrinho[i]=prodPreco[4];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
-        }
+  if(quantProd[i]<=estoqueProd[4] || quantProd[i]==estoqueProd[4]){
+		estoqueProd[4]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[4]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+    }
   else if(escProd==3){
   carrinho[i]=prodPreco[5];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
-        }
+  if(quantProd[i]<=estoqueProd[5] || quantProd[i]==estoqueProd[5]){
+		estoqueProd[5]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[5]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+    }
   else
-  printf("Número digitado inválido, por favor tente novamente.");
+  	printf("Número digitado inválido, por favor tente novamente.");
 }
 
 void jogos_ps4(){
   printf("| 1- The Last Of Us II | 2- God Of War 4| 3- Gran Turismo |\n");
+  printf("| R$: 33,00 | R$: 36,00| R$: 45,00 |\n");
+  printf("|Estoque: %d|Estoque: %d|Estoque: %d|\n", estoqueProd[6],estoqueProd[7],estoqueProd[8]);
   printf("------------------------------: ");
   scanf("%d", &escProd);
   if(escProd==1){
   carrinho[i]=prodPreco[6];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[6] || quantProd[i]==estoqueProd[6]){
+		estoqueProd[6]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[6]){
+			printf("Desculpe, estoque do produto insuficiente.");}
   }
   else if(escProd==2){
   carrinho[i]=prodPreco[7];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
-        }
+  if(quantProd[i]<=estoqueProd[7] || quantProd[i]==estoqueProd[7]){
+		estoqueProd[7]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[7]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+    }
   else if(escProd==3){
   carrinho[i]=prodPreco[8];
   printf("Quantidade: ");
-  scanf("%d", &quantProd[i]);}
-        else
-  printf("Opção digitada inválida, por favor tente novamente.");
+  scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[8] || quantProd[i]==estoqueProd[8]){
+		estoqueProd[8]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[8]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+	}
+  else
+  	printf("Opção digitada inválida, por favor tente novamente.");
 }
 
 void jogos_xbox360(){
   printf("| 1- Halo 1 | 2- Gears Of War 2 | 3- Fifa 20 |\n");
+  printf("| R$: 33,00 | R$: 36,00| R$: 45,00 |\n");
+  printf("|Estoque: %d|Estoque: %d|Estoque: %d|\n", estoqueProd[9],estoqueProd[10],estoqueProd[11]);
   printf("------------------------------: ");
   scanf("%d", &escProd);
   if(escProd==1){
   carrinho[i]=prodPreco[9];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[9] || quantProd[i]==estoqueProd[9]){
+		estoqueProd[9]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[9]){
+			printf("Desculpe, estoque do produto insuficiente.");}
   }
   else if(escProd==2){
   carrinho[i]=prodPreco[10];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
-        }
+  if(quantProd[i]<=estoqueProd[10] || quantProd[i]==estoqueProd[10]){
+		estoqueProd[10]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[10]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+    }
   else if(escProd==3){
   carrinho[i]=prodPreco[11];
   printf("Quantidade: ");
-  scanf("%d", &quantProd[i]);}
-        else
-  printf("Opção digitada inválida, por favor tente novamente.");
+  scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[11] || quantProd[i]==estoqueProd[11]){
+		estoqueProd[11]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[11]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+	}
+  else
+  	printf("Opção digitada inválida, por favor tente novamente.");
 }
 
 void jogos_xboxone(){
   printf("| 1- Recore | 2- Halo Wars 2| 3- Sea Of Thieves |\n");
+  printf("| R$: 33,00 | R$: 36,00| R$: 45,00 |\n");
+  printf("|Estoque: %d|Estoque: %d|Estoque: %d|\n", estoqueProd[12],estoqueProd[13],estoqueProd[14]);
   printf("------------------------------: ");
   scanf("%d", &escProd);
   if(escProd==1){
   carrinho[i]=prodPreco[12];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
-  }
+  if(quantProd[i]<=estoqueProd[12] || quantProd[i]==estoqueProd[12]){
+		estoqueProd[12]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[12]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+  	}
   else if(escProd==2){
   carrinho[i]=prodPreco[13];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
-        }
+  if(quantProd[i]<=estoqueProd[13] || quantProd[i]==estoqueProd[13]){
+		estoqueProd[13]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[13]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+    }
   else if(escProd==3){
   carrinho[i]=prodPreco[14];
   printf("Quantidade: ");
-  scanf("%d", &quantProd[i]);}
-        else
-  printf("Opção digitada inválida, por favor tente novamente.");
+  scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[14] || quantProd[i]==estoqueProd[14]){
+		estoqueProd[14]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[14]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+	}
+  else
+  	printf("Opção digitada inválida, por favor tente novamente.");
 }
 
 void controles(){
   printf("| 1- PS4 | 2- Xbox One | 3- Controle para computador |");
+  printf("| R$: 33,00 | R$: 36,00| R$: 45,00 |\n");
+  printf("|Estoque: %d|Estoque: %d|Estoque: %d|\n", estoqueProd[15],estoqueProd[16],estoqueProd[17]);
   printf("------------------------------: ");
   scanf("%d", &escProd);
   if(escProd==1){
   carrinho[i]=prodPreco[15];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
-  }
+  if(quantProd[i]<=estoqueProd[15] || quantProd[i]==estoqueProd[15]){
+		estoqueProd[15]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[15]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+	}
   else if(escProd==2){
   carrinho[i]=prodPreco[16];
   printf("Quantidade: ");
   scanf("%d", &quantProd[i]);
-        }
+  if(quantProd[i]<=estoqueProd[16] || quantProd[i]==estoqueProd[16]){
+		estoqueProd[16]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[16]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+	}
   else if(escProd==3){
   carrinho[i]=prodPreco[17];
   printf("Quantidade: ");
-  scanf("%d", &quantProd[i]);}
-        else
-  printf("Opção digitada inválida, por favor tente novamente.");
+  scanf("%d", &quantProd[i]);
+  if(quantProd[i]<=estoqueProd[17] || quantProd[i]==estoqueProd[17]){
+		estoqueProd[17]-=quantProd[i];
+	}else if(quantProd[i]>quantProd[17]){
+			printf("Desculpe, estoque do produto insuficiente.");}
+	}
+  else
+  	printf("Opção digitada inválida, por favor tente novamente.");
 }
 
 float calculoPag(float totalPag){
   int escPag, escPag2, escCard, parcelamento;
   float valor;
+  /* Vou tirar essa parte de escolher o pagamento e fazer so mais pra frente,
+  depois que entregar o suficiente para ganhar nota*/
+  
   printf("\nQual forma gostaria de efetuar o pagamento?\n");
   printf("| 1- Cartão | 2- Boleto |\n-------------------:");
   scanf("%d", &escPag);
